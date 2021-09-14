@@ -28,7 +28,7 @@ monster_damage=0
 # Setup game stats
 score=0
 dificulty=0
-weapon=0
+weapons=('Fists')
 
 next_room(){
 	clear
@@ -40,7 +40,8 @@ next_room(){
 	get_monster
 
 	echo There is a level $monster_level $monster_name!
-	echo "What do you want to do? (explore)"
+
+	promt_attack
 }
 
 print_score(){
@@ -48,8 +49,12 @@ print_score(){
 }
 
 get_monster(){
-	monster=${$RANDOM % #monster_names[@]}
+	monster=$($RANDOM % ${#monster_names[@]})
 	monster_name=${monster_names[monster]}
+}
+
+promt_attack(){
+	echo Select a weapon "(by number)": $weapons
 }
 
 next_room
