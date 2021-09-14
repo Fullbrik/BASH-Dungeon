@@ -8,6 +8,8 @@ monster_names=("Spider")
 monster_healths=(10) # This will be multiplied by the dificulty
 monster_damages=(1) # This will be multiplied by the dificulty
 
+monster_count=${#monster_names[@]}
+
 wait_user(){
 	read -n 1 -s -r -p "Press any key to continue: "
 }
@@ -49,8 +51,11 @@ print_score(){
 }
 
 get_monster(){
-	monster=$($RANDOM % ${#monster_names[@]})
+	monster=$(( $RANDOM % $monster_count ))
 	monster_name=${monster_names[monster]}
+	monster_level=$(($dificulty + 1))
+	monster_health=${monster_healths[monster]}
+	monster_damage=${monster_damages[monster]}
 }
 
 promt_attack(){
